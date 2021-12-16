@@ -1,0 +1,14 @@
+---
+
+- name: test
+  hosts: all
+  become: no
+
+  tasks:
+    
+    - block:
+      - name: Copy src
+        copy:
+          src: ../target/SimpleAdd-1.0-SNAPSHOT.jar
+          dest: /home/mftiedu/davletshin/jenkins/Application.jar
+...
