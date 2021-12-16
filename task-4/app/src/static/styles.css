@@ -1,0 +1,36 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dimg {
+    max-width: 300px;
+}
+
+.overlay {
+    display: table;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.overlay>div {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.false {
+    display: none;
+}

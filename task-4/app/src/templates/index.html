@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block content %}
+<main>
+    <h3>Генератор картинок</h3>
+    <div>
+        <button id="get-btn">Получить</button>
+        <button id="add-btn">Добавить в избранное</button>
+    </div>
+    <img id="img" class="dimg" src="">
+    <div id="overlay" class="overlay false">
+        <div>ЗАГРУЗКА...</div>
+    </div>
+</main>
+
+<script>
+    const showEl = (el) => {
+        el.classList.remove("false");
+    };
+
+    const hideEl = (el) => {
+        el.classList.add("false");
+    };
+
+    window.onload = (e) => {
+        const getBtn = document.getElementById("get-btn");
+        const addBtn = document.getElementById("add-btn");
+        const img = document.getElementById("img");
+        const overlay = document.getElementById("overlay");
+
+        const getUrl = "/random";
+        const addUrl = "/add";
+        let imgSrc;
+
+        img.addEventListener('load', (e) => {
+            hideEl(overlay);
+        });
+
+        getBtn.addEventListener('click', (e) => {
+            showEl(overlay);
+
+            fetch(getUrl)
+                .then(res => res.json())
+                .then(data => {
+                    img.src = data.link;
+                    imgSrc = data.link;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        });
+
+        addBtn.addEventListener('click', (e) => {
+            if (!imgSrc) {
+                alert("Нечего сохранять!");
+                return;
+            }
+
+            fetch(addUrl, {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        link: imgSrc
+                    })
+                })
+                .then((e) => {
+                    // Handle response we get from the API
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        });
+    }
+</script>
+{% endblock %}

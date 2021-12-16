@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block content %}
+<main>
+    <h3>Избранные картинки</h3>
+    <ul id="ul"></ul>
+    <div id="overlay" class="overlay false">
+        <div>ЗАГРУЗКА...</div>
+    </div>
+</main>
+
+<script>
+    const showEl = (el) => {
+        el.classList.remove("false");
+    };
+
+    const hideEl = (el) => {
+        el.classList.add("false");
+    };
+
+    const createImage = (src) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.classList.add("dimg");
+        return img;
+    }
+
+    window.onload = () => {
+        const overlay = document.getElementById("overlay");
+        const ul = document.getElementById("ul");
+
+        const getAllUrl = "/get-all";
+        showEl(overlay);
+
+        fetch(getAllUrl)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(({
+                    link
+                }) => {
+                    ul.appendChild(createImage(link));
+                });
+
+                hideEl(overlay);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
+</script>
+{% endblock %}
