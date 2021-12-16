@@ -1,0 +1,32 @@
+---
+- name: Install nodejs on RedHat Family
+  yum:
+    name=nodejs
+    state=latest
+  when:
+    ansible_os_family == "RedHat"
+- name: Check nodejs
+  shell: node --version
+- name: install curl
+  apt:
+    name=curl
+    state=latest
+  when:
+    ansible_os_family == "Debian"
+- name: install npm on Debian
+  shell: curl -L https://npmjs.org/install.sh | sudo sh
+  when:
+    ansible_os_family == "Debian"
+- name: Check npm
+  shell: npm --version
+- name: Create app
+  shell: npx create-react-app app4
+- name: Npm run build
+  shell: npm run build --prefix ./app4
+- name: Npm install serve
+  shell: npm install -g serve
+- name: serve build
+  shell: serve build --prefix ./app4
+- name: ls
+  shell: ls
+...

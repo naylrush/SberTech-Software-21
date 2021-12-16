@@ -1,0 +1,8 @@
+---
+- hosts: centOs_group
+  roles:
+   - nginx
+- hosts: debian_group
+  roles:
+   - nginx
+...
