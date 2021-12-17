@@ -1,0 +1,5 @@
+[centOs_group]
+centOs ansible_host=194.87.57.31 ansible_ssh_user=mftiedu ansible_ssh_pass=cHONtic
+
+[debian_group]
+debian ansible_host=194.87.107.68 ansible_ssh_user=mftiedu ansible_ssh_pass=cHONtic
